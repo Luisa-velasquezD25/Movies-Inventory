@@ -141,4 +141,18 @@ router.put('/:mediaId', [
     
 });
 
+router.get('/:mediaId', async function (req, res) {
+    try{
+        const media = await Media.findById(req.params.mediaId);
+        if(!media) {
+            return res.status(404).send('No exist media');
+        }
+        res.send(media);
+    } catch(error) {
+        console.log(error);
+        res.status(500).send('message error');
+    }
+    
+})
+
 module.exports = router;
